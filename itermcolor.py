@@ -3,9 +3,6 @@
 Display tabs in iTerm2 in different colors based on target hostname
 
 """
-import socket
-import random
-import colorsys
 import sys
 
 USAGE = """
