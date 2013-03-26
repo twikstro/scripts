@@ -8,7 +8,14 @@ import sys
 USAGE = """
 Usage: itermcolor.py [role]
 e.g. itermcolor.py production
-Speficy role colos below
+
+Usage in .ssh/config:
+Add the following two lines for each host, changing the role parameter accordingly:
+
+    PermitLocalCommand yes
+    LocalCommand python ~/path/to/itermcolor.py jump
+
+Customize role colors below
 """
 
 def get_color_by_role(s):
@@ -18,6 +25,9 @@ def get_color_by_role(s):
     orange = (0.9, 0.3, 0)
     green = (0, 1, 0)
     red = (1, 0, 0)
+    white = (1, 1, 1)
+
+    defaultColor = white
 
     colorTable = {
     'noncrit': green,
@@ -27,7 +37,7 @@ def get_color_by_role(s):
     'jump': blue
     }
 
-    return colorTable[s]
+    return colorTable.setdefault(s, defaultColor)
 
 
 def set_tab_color(color):
@@ -48,12 +58,11 @@ def itermcolor(name):
 
 def main():
 
-    if(len(sys.argv) < 1):
+    if (len(sys.argv) != 2):
         sys.exit(USAGE)
 
     name = sys.argv[1]
     itermcolor(name)
-
 
 if __name__ == "__main__":
     main()
