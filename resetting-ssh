@@ -1,0 +1,5 @@
+#!/bin/bash
+# Run the ssh command normally
+ssh $*
+# And reset the tab color
+echo -ne "\033]6;1;bg;*;default\a"
